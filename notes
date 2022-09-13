@@ -1,0 +1,427 @@
+String Handling:
+-----------------
+string object: a group of characters enclosed in double quotes
+-> java.lang (default package)
+	String: immutable(constant)
+	StringBuilder: mutable but not synchronized
+	StringBuffer: mutable & synchronized
+	
+
+Constructors:
+-------------------
+-> It's name is same as the classname
+-> used to initialize the object
+-> parameterized & parameterless
+-> called at the time of object creation only
+-> constructor chaining: a constructor calling another constructor
+-> this() is used to call a constructor in the same class
+-> super() is used to call a constructor in childclass to superclass
+-> if developer doesn't write a single constructor then compiler
+provides a default zero-arg constructor
+-> defining multiple constructors with different parameters is called constructor overloading
+-> defining multiple methods with the same name but different type/number of parameters is
+called method overloading
+
+
+this:
+--------------------------
+-> refers the current object
+-> differentiate the instance fields & local variables if their name is same
+-> call constructors in the same class
+-> 
+
+
+class Book{
+	int bookId;
+	String name;
+	String author;
+}
+
+class BookTest{
+	main(){
+		//create Book objects
+		//show the count of book objects
+	}
+}
+
+static methods & fields:
+-----------------------------------------
+-> static methods & fields are shared among all the objects
+-> static field has only one copy
+-> static fields/methods are loaded in method/class area and available to all objects
+-> static fields/methods are referred by enclosing classname
+-> static block is loaded even before main method
+-> static block is used to initialize static fields
+-> System.out.println:
+	System: a built-in class in java.lang package
+	out: final static field of PrintStream type inside System class
+	println: a method of PrintStream class
+	
+-> System.in : standard input device(keyboard)
+-> System.out :  standard output device (console) normal messages
+-> System.err : standard output device (console) error messages
+
+static(class) method							non-static(instance) method
+------------------------------------------------------------------------------
+-> loaded in method area			|-> loaded in stack area
+-> called via classname				|-> called via object
+-> loaded at time of class loading	|-> loaded when they're called via object
+-> static method can't call			|-> non-static method can call static 
+ non-static method/field directly	|methods directly
+-> to call non-static method from a |
+static method, we need object		|
+-> to access non-static(instance) 	|									
+field from a static method, we		|
+need an object						|
+-> can't use this/super keyword 	|
+inside a static method				|
+																	
+=> instance/static fields
+
+int		-->		0
+byte 	-->		0
+short	-->		0
+long	-->		0
+float	--> 	0.0
+double	-->		0.0
+char	-->		whitespace character
+boolean	--> 	false
+
+String	-->		null
+StringBuilder	--> 	null
+Employee		-->		null
+
+Inheritance:
+------------------
+=> extending an existing class/interface is called inheritance
+=> Code Re-usability
+Types of Inheritance:
+	1. Single Inheritance
+	2. Multi-Level Inheritance
+	3. Multiple Inheritance => NOT ALLOWED WITH CLASSES
+	4. Hybrid Inheritance
+	
+-> A childclass/subclass/derived class has access to non-private members of
+superclass/baseclass/parent class
+
+-> public
+-> protected
+-> package-private
+
+-> Parent class private members are not inherited into child class
+-> Parent class constructors are not inherited into subclass
+-> Parent class constructors can be called from subclass constructor
+
+=> Method Overriding:
+-> Re-defining the superclass method into childclass is called method overriding
+-> we can override only inherited non-static methods
+
+super keyword:
+===============================
+-> super refers the superclass object
+-> used to call superclass constructors
+-> used to call superclass methods
+-> used to refer superclass fields
+-> super() must be the first statement inside a constructor
+
+Abstraction:
+================================
+-> It is used to hide complexities and show only required info
+-> Abstract class:
+----------------------
+-> A class declared with 'abstract' keyword is called abstract class
+-> It can have instance/static fields/methods like a normal class
+-> It can have constructors like a normal class
+-> It can have abstract methods and non-abstract methods too
+-> An abstract class can't be instantiated
+-> It should be inherited by child classes
+-> It works as superclass in a hierarchy/API
+-> It can't be final
+
+final keyword:
+----------------
+final with variables: constant; non-modifiable
+final with methods: can't override
+final with classes: can't inherited
+
+
+packages in Java:
+======================
+A package is used to group together related classes, interfaces, enums, annotations & exceptions
+
+-> A package is represented by a folder in system
+-> com.hsbc.buisness 
+	com
+		hsbc
+			buisness
+				EmpService.java
+				ClientService.java
+				
+-> com.hsbc.dao
+
+-> built-in packages:
+	java.util
+	java.lang
+	java.math
+	java.io
+	java.sql
+	java.util.function
+	java.util.stream
+	java.time
+	
+java8 docs 
+
+-> A .java file can have max one public class
+-> One package can have several public java classes
+-> superclass reference variable can refer to childclass object
+
+Access Specifiers:
+----------------------
+private: access only inside the given class
+protected: access inside the same package + other packages via inheritance
+public: access everywhere
+package-private(no modifier)
+
+-> At the top level(class, interface, enum, record, annotation), only 2 modifiers are allowed
+i.e. public or package-private
+
+-> Non-Access Modifiers:
+=============================
+	abstract
+	final
+	static
+	synchronized
+
+Multiple Inheritance:
+---------------------------
+Multiple Inheritance of state
+Multiple Inheritance of implementation
+Multiple Inheritance of type -> ALLOWED via interfaces
+
+Layered Architecture:
+============================
+separate the concerns
+achieve Rapid Application Development
+
+business layer
+dao layer
+presentation layer
+controller layer
+
+employee management application
+
+-------------------
+Java 8 Features:
+-------------------
+Lambda Expression
+Stream API
+Optional class
+new Date & Time API
+CompletableFuture
+
+Exception Handling:
+=======================
+What is an exception?
+Ans: An exception is an object that represents an abnormal event at the runtime
+-> When any abnormal event occurs, JVM creates an object representing that event,
+then JVM looks for respective handlers(catch block),
+	i. if a handler is found, exception object is handled
+	ii. if a handler isn't found, program terminates abnormally
+	
+-> Abnormal Event: 
+	i. trying to divide a number by zero
+	ii. access a method/field with null reference
+	iii. access an array beyond its index
+	iv. cast an object to incompatible type
+	etc...
+	
+-> java.lang.Throwable is the superclass of all exceptions
+-> It has two child classes:
+	I. java.lang.Error (no need to handle)
+	II. java.lang.Exception
+	
+=> Two Type of Exceptions
+	1. Checked Exceptions
+	2. Un-Checked Exceptions (no need to handle)
+	
+=> No exception of type Address can be thrown;
+an exception type must be a subclass of Throwable 
+
+-> A checked exception must be
+	i. handled using try-catch block
+	ii. declared using throws clause
+	
+Checked Exceptions:
+-----------------------
+1. ClassNotFoundException
+2. SQLException
+3. IOException
+4. FileNotFoundException
+5. InterruptedException
+6. Exception
+
+Unchecked Exceptions:
+-----------------------
+1. RuntimeException
+2. ArithmeticException
+3. NullPointerException
+4. ArrayIndexOutOfBoundsException
+5. ClassCastException
+6. IllegalArgumentException
+7. UnspportedOperationException
+
+try -> contains risky code that might generate exception
+throws -> declares the exceptions at method/constructor signature
+throw -> create & throw the exception explicitly
+catch -> contains exception handling logic
+finally -> contains resource clean-up code, runs everytime
+
+Multi-Threading:
+===================
+1. extending java.lang.Thread class
+2. implementing java.lang.Runnable interface
+
+-> An interface which has no method is called marker interface
+e.g. java.io.Serializable
+
+Serialization: converting an object to byte streams
+-> or flattening a JVM object to file format
+
+
+****************************
+*Java Collections Framework*
+****************************
+-> A collection is a container object that holds other objects
+-> It provides methods to store, retrieve & manipulate the objects
+-> java.util package provides basic collection API
+-> It provides built-in algorithms & implementations
+
+Common Interfaces:
+----------------------
+	Collection
+	List
+	Set
+	Queue
+	Map
+	SortedSet
+	SortedMap
+	NavigableSet
+	NavigableMap
+	Enumeration
+	Iterator
+	ListIterator
+	
+Common Classes/Implementations:
+---------------------------------
+	ArrayList
+	LinkedList
+	Vector
+	Stack
+	HashSet
+	LinkedHashSet
+	TreeSet
+	HashMap
+	LinkedHashMap
+	Hashtable
+	TreeMap
+		
+Collection interface:
+-------------------------
+	The root interface in the collection hierarchy.
+	A collection represents a group of objects, known as its elements.
+	 Some collections allow duplicate elements and others do not.
+	 Some are ordered and others unordered.
+	 The JDK does not provide any direct implementations of this interface: 
+	 it provides implementations of more specific subinterfaces like Set and List.
+	 This interface is typically used to pass collections around and manipulate them where 
+	 maximum generality is desired.
+
+1) Collection Hierarchy: java.util.Collection interface
+	List
+	Set
+	Queue
+	Deque
+	ArrayList, LinkedList, Vector, Stack
+	HashSet, LinkedHashSet, TreeSet
+	
+2) Map Hierarchy: java.util.Map interface
+	SortedMap
+	NavigableMap
+	HashMap
+	LinkedHashMap
+	TreeMap
+	
+-> A collection only stores objects; not primitives
+
+List interface
+------------------
+-> allows ordered collection
+-> allows duplicates
+-> allows multiple null
+-> major implementations: ArrayList, LinkedList
+-> ArrayList is suitable for random access of elements
+-> LinkedList is suitable for frequent insertions/deletions
+
+Set interface
+--------------------
+-> doesn't duplicates
+-> max one null allowed
+-> HashSet, LinkedHashSet, TreeSet
+-> overriding hashCode() & equals() method guarantees that if two objects are equal by content
+then their hashCode must be equal
+
+-> If hashcode is equal of two objects then HashSet doesn't allow the second occurance of the same object
+
+-> LinkedHashtSet subclass of HashSet, follows insertion order
+
+Difference between Comparable & Comparator
+---------------------------------------------
+Comparable											Comparator
+-> java.lang package							 -> java.util package
+-> It changes the original class				 -> It doesn't the original class
+-> only one way of sorting implementation        -> multiple ways of sorting implementations
+-> public int compareTo(Object o)				 -> public int compare(Object o1, Object o2);
+
+
+Map <<interface>>
+--------------------
+-> It maps keys with values
+-> key must be unique
+-> HashMap allow max one null as key
+-> values can be null
+-> Hashtable doesn't allow null as key
+
+
+- Bound mismatch: The type String is not a valid substitute for the bounded parameter <T extends 
+	 Number> of the type Num<T>
+	- Bound mismatch: The type String is not a valid substitute for the bounded parameter <T extends 
+	 Number> of the type Num<T>
+
+
+T extends Number: upper bound 
+
+T super Number: lower bound
+
+JDBC:
+=======
+DML: INSERT, UPDATE, DELETE
+DDL: CREATE, ALTER, DROP, TRUNCATE, MERGE, RENAME
+
+
+
+Hotel Booking:
+--------------------
+Customer
+Room
+Admin
+
+
+
+
+
+
+
+
+
+
+
